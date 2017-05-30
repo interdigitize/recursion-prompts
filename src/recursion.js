@@ -21,23 +21,39 @@ var factorial = function(n) {
 
 // 2. Compute the sum of an array of integers.
 var sum = function(array) {
-  var another = array.slice()
-  var inner = function(another){
-    if(another.length === 0) {
-      return 0;
-    }
-    return another.shift() + inner(another);
+  if(array.length === 0){
+    return 0;
   }
-  return inner(another);
+  return array[0] + sum(array.slice(1, array.length));
 };
 
 //console.log(sum([1,2,3,4,5,6])); // 21
 
 
 // 3. Sum all numbers in an array containing nested arrays.
-// arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  var flattenArr = [];
+    array.forEach(function(el){
+      if(typeof el === 'number') {
+        flattenArr.push(el);
+      } else {
+        el.forEach(function(el){
+          if(typeof el === 'number') {
+            flattenArr.push(el);
+          } else {
+          el.forEach(function(el){
+            flattenArr.push(el);
+          });
+        }
+      });
+    }
+  });
+  return flattenArr.reduce(function(cur, pre){
+    return cur += pre;
+  });
 };
+
+console.log(arraySum([1,[2,3],[[4]],5])); // 15
 
 // 4. Check if a number is even.
 var isEven = function(n) {
