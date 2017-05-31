@@ -32,33 +32,57 @@ var sum = function(array) {
 
 // 3. Sum all numbers in an array containing nested arrays.
 var arraySum = function(array) {
-  var flattenArr = [];
+  var total = 0;
     // iterate through children of the initial node
     for(var i = 0; i < array.length; i++){
       if(typeof array[i] === 'number'){
-        //console.log('array[i]', array[i]);
-        flattenArr.push(array[i]);
+        total += array[i];
       } else{
-        //console.log('array[i]', array[i]);
-        arraySum(array[i]);
-        //return flattenArr.concat(arraySum(array[i]));
+        total += arraySum(array[i]);
       }
     }
-  return flattenArr;
+  return total;
 };
 
-console.log(arraySum([1,[2,3],[[4]],5])); // 15
+//console.log(arraySum([1,[2,3],[[4]],5])); // 15
 
 // 4. Check if a number is even.
 var isEven = function(n) {
-  
+  if(n < 0) {
+    n = Math.abs(n);
+    isNeg = true;
+  }
+  if(n === 0) {
+    return true;
+  }
+  if(n === 1) {
+    return false;
+  }
+  return isEven(n - 2);
 };
+
+console.log(isEven(-14));
+
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  var isNeg = false;
+  if(n < 0){
+    n = Math.abs(n);
+    isNeg = true;
+  }
+  if (n === 0){
+    return 0;
+  }
+  if(isNeg === true){
+    return (n - 1 + sumBelow(n - 1)) * -1;
+  }
+  return n - 1 + sumBelow(n - 1);
 };
+
+ //console.log(sumBelow(10));
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
