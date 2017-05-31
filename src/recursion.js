@@ -61,7 +61,7 @@ var isEven = function(n) {
   return isEven(n - 2);
 };
 
-console.log(isEven(-14));
+//console.log(isEven(-14));
 
 
 // 5. Sum all integers below a given integer.
@@ -87,6 +87,7 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+
 };
 
 // 7. Compute the exponent of a number.
@@ -201,10 +202,24 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // 25. Get the first n Fibonacci numbers. In the Fibonacci sequence, each subsequent
 // number is the sum of the previous two.
 // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
-// fibonacci(5); // [0,1,1,2,3,5]
+
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
-};
+  var results = [0, 1];
+  var counter = 0;
+  if(n <= 0) {return null};
+  var addLastTwo = function (uptoNum) {
+    if(counter === (uptoNum - 1)){
+      return results;
+    }
+    results.push(results[counter] + results[counter + 1]);
+    counter++;
+    addLastTwo(n);
+  }
+  addLastTwo(n);
+  return results;
+}
+//console.log(fibonacci(5)); // [0,1,1,2,3,5]
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
 // [0,1,1,2,3,5,8,13,21]
@@ -215,10 +230,18 @@ var nthFibo = function(n) {
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
-// var words = ['i', 'am', 'learning', 'recursion'];
-// capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
 var capitalizeWords = function(array) {
+  var counter = 0
+  if(counter === (array.length - 1)){
+    return [array[array.length - 1].toUpperCase()];
+  }
+  counter++;
+  return [array[0].toUpperCase() + capitalizeWords(array.slice(1))];
 };
+
+//var words = ['i', 'am', 'learning', 'recursion'];
+//console.log(capitalizeWords(words)); // ['I', 'AM', 'LEARNING', 'RECURSION']
 
 // 28. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car','poop','banana']); // ['Car','Poop','Banana']
